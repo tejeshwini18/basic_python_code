@@ -27,6 +27,7 @@ print(odd_nums)
 even_nums = [ i for i in range(10) if i%2==0]
 print(even_nums)
 
+
 #dict comprehension
 sqr_dict = {n:n*n for n in range(1,10)}
 print(sqr_dict)

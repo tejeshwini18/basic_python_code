@@ -16,10 +16,10 @@ for value in my_dict.values():
 # Iterate over key-value pairs
 for key, value in my_dict.items():
     print(key, value)  
-
 print('Sorted')
 sorted_dict={key:val for key,val in sorted(my_dict.items())}
 print(sorted_dict)
+
 
 # copying a dictionary
 shallow_copy_dict = my_dict.copy()
@@ -37,6 +37,7 @@ second_dict =  {'surname': 'Jackson', 'company': 'IBM', 'gender': 'Female'}
 my_dict.update(second_dict)
 print('Merged Dictionary: ',my_dict)
 # merged_dict = {**my_dict, **second_dict}
+
 
 dupl_dictionary =  {'name': 'John', 'age': 25, 'gender': 'Female', 'city': 'Pune', 'name': 'Jolly', 'city': 'Bengluru'}
 print('Duplicate Dictionary: ',dupl_dictionary)
