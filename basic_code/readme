@@ -1,0 +1,19 @@
+# API Scheduler
+
+## Objective
+Schedule API calls to `ifconfig.co` at specified timestamps with second-level precision. Supports concurrent API calls for duplicate timestamps.
+
+## Features
+1. Accepts timestamps via command-line arguments.
+2. Calls the API `https://ifconfig.co` to fetch the IP address.
+3. Handles multiple calls at the same second using threads.
+4. Logs output and errors to `api_scheduler.log`.
+
+## Usage
+### Prerequisites
+- Python 3.8 or higher.
+- Internet connection.
+
+### Running the Script
+```bash
+python api_scheduler.py --timestamps "09:15:25,11:58:23,13:45:09,13:45:09"
