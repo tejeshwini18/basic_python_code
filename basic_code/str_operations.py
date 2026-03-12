@@ -225,3 +225,4 @@ if __name__=='__main__':
     p.isanagram('heart','earth')
     print('\n')
     p.isanagram('me','mine')
+	
