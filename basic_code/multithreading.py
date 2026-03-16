@@ -6,38 +6,26 @@ SUMMARY:
               Threads share memory. Good when tasks spend time waiting on I/O.
   Best for:   I/O-bound work (network, disk, waiting on responses).
 """
-
-import threading
 import time
+from threading import Thread
+num= 0
 
+# The bottleneck of the code which is CPU-bound
+def upgrade(n):
+while num<400000000:
+num=num+1
 
-def task(thread_id: int, duration: float) -> None:
-    """Simulate an I/O-bound task (e.g., waiting for response, reading file)."""
-    print(f"Thread {thread_id} started")
-    time.sleep(duration)
-    print(f"Thread {thread_id} finished after {duration}s")
+# Creation of multiple threads
+t1 = Thread(target=upgrade, args=(num//2,))
+t2 = Thread(target=upgrade, args=(num//2,))
 
+# multi thread architecture, recording time
+start = time.time()
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+end = time.time()
 
-def main() -> None:
-    # Create threads
-    threads = [
-        threading.Thread(target=task, args=(i, 1.0 + i * 0.5))
-        for i in range(1, 5)
-    ]
+print('Time taken in seconds -', end - start)
 
-    start = time.perf_counter()
-
-    # Start all threads
-    for t in threads:
-        t.start()
-
-    # Wait for all threads to complete
-    for t in threads:
-        t.join()
-
-    elapsed = time.perf_counter() - start
-    print(f"\nAll threads done in {elapsed:.2f}s (would be ~3.5s if sequential)")
-
-
-if __name__ == "__main__":
-    main()
