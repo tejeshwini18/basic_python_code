@@ -8,34 +8,23 @@ SUMMARY:
 """
 
 import multiprocessing
-import time
 
+def print_cube(num):
+	print("Cube: {}".format(num * num * num))
 
-def cpu_task(n: int) -> int:
-    """Simulate a CPU-bound task (e.g., number crunching)."""
-    total = 0
-    for i in range(n):
-        total += i * i
-    return total
-
-
-def worker(process_id: int, value: int) -> tuple[int, int]:
-    """Worker function each process runs."""
-    result = cpu_task(value)
-    return process_id, result
-
-
-def main() -> None:
-    # Use 4 processes; each does a chunk of work
-    with multiprocessing.Pool(processes=4) as pool:
-        start = time.perf_counter()
-        # Map work across processes
-        results = pool.starmap(worker, [(i, 1_000_000) for i in range(4)])
-        elapsed = time.perf_counter() - start
-
-    print("Results:", results)
-    print(f"Completed in {elapsed:.2f}s using 4 processes")
-
+def print_square(num):
+	print("Square: {}".format(num * num))
 
 if __name__ == "__main__":
-    main()
+	# creating processes
+	p1 = multiprocessing.Process(target=print_square, args=(10, ))
+	p2 = multiprocessing.Process(target=print_cube, args=(10, ))
+	p1.start()
+	p2.start()
+	# wait until process 1 is finished
+	p1.join()
+	p2.join()
+
+	# both processes finished
+	print("Done!")
+
